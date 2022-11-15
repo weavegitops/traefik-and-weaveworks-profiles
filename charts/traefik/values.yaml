@@ -1,0 +1,10 @@
+traefik:
+  hub:
+    ## Enabling Hub will:
+    # * enable Traefik Hub integration on Traefik
+    # * add `traefikhub-tunl` endpoint
+    # * enable addRoutersLabels on prometheus metrics
+    # * enable allowExternalNameServices on KubernetesIngress provider
+    # * enable allowCrossNamespace on KubernetesCRD provider
+    # * add an internal (ClusterIP) Service, dedicated for Traefik Hub
+    enabled: false

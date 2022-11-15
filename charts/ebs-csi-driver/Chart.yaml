@@ -1,0 +1,35 @@
+apiVersion: v2
+name: aws-ebs-csi-driver
+description: A Weaveworks Helm chart for the AWS EBS-CSI Driver Profile
+type: application
+version: 0.0.7
+dependencies:
+  - name: aws-ebs-csi-driver
+    version: "2.10.1"
+    repository: "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
+kubeVersion: ">=1.16.0-0"
+sources:
+  - https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+
+keywords:
+- storage
+- aws
+- ingress
+- csi
+
+maintainers:
+  - name: Weaveworks
+    email: support@weave.works
+
+annotations:
+  "weave.works/profile": aws-ebs-csi-driver
+  "weave.works/category": Storage
+  "weave.works/layer": layer-1
+  "weave.works/operator": "true"
+  "weave.works/links": |
+    - name: Chart Sources
+      url: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+    - name: Upstream Project
+      url: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+  "weave.works/profile-ci": |
+    - "eks"

@@ -1,0 +1,125 @@
+kube-prometheus-stack:
+  kubeControllerManager:
+    enabled: false
+  fullnameOverride: weaveworks-prometheus
+  enabled: true
+  defaultRules:
+    rules:
+      kubeApiserverAvailability: false
+      kubeApiserverBurnrate: false
+      kubeApiserverHistogram: false
+      kubeApiserverSlos: false
+      kubeControllerManager: false
+      kubelet: false
+      kubeScheduler: false
+      etcd: false
+  grafana:
+    grafana.ini:
+      users:
+        auto_assign_org_role: Admin
+      auth:
+        disable_login_form: true
+      auth.basic:
+        enabled: false
+      auth.generic_oauth:
+        enabled: true
+        allow_sign_up: true
+        scopes: email groups profile openid
+        auth_url: https://auth.internal.weave.works/auth
+        token_url: https://auth.internal.weave.works/token
+        api_url: https://auth.internal.weave.works/userinfo
+        client_id: '{{ (.params).CLUSTER_NAME }}'
+      server:
+        # domain: "grafana-mgmt.internal.weave.works"
+        root_url: https://grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works
+    enabled: true
+    ingress:
+     enabled: true
+     ingressClassName: nginx
+     annotations:
+       cert-manager.io/cluster-issuer: "letsencrypt"
+       ingress.kubernetes.io/force-ssl-redirect: "true"
+     hosts:
+     - 'grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works'
+     paths:
+     - /
+     pathType: ImplementationSpecific
+     tls:
+     - secretName: grafana-tls
+       hosts:
+       - 'grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works'
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      replicas: 3
+      secrets: ["alertmanager-slack-urls"]
+    config:
+      route:
+        group_by: ['alertname', 'cluster']
+        group_wait: 30s
+        receiver: "null"
+        group_interval: 5m
+        repeat_interval: 4h
+      templates:
+        - '/etc/alertmanager/config/*.tmpl'
+      receivers:
+      - name: "null"
+      - name: 'corp-it'
+        slack_configs:
+          - api_url_file:  "/etc/alertmanager/secrets/alertmanager-slack-urls/url"
+            channel: corporate-it-internal
+            send_resolved: true
+            title: |
+              {{`{{ .CommonLabels.alertname }} {{ .CommonLabels.severity | toUpper }} {{ .Status | toUpper }} - {{ .CommonAnnotations.summary }}`}}
+            color: |
+              {{`{{ if eq .Status "firing" }}{{ if eq .CommonLabels.severity "warning" }}warning{{ else }}danger{{ end }}{{ else }}good{{ end }}`}}
+            text: |-
+              {{`{{ .CommonAnnotations.impact -}}`}}
+              {{`{{- if .CommonAnnotations.playbookURL }} <{{ .CommonAnnotations.playbookURL -}}|Playbook> {{- end -}}`}}
+              {{`{{- if .CommonAnnotations.dashboardURL }} <{{ .CommonAnnotations.dashboardURL -}}|Dashboard> {{- end -}}`}}
+  prometheus:
+    prometheusSpec:
+      additionalScrapeConfigs:
+      - job_name: 'kubernetes-nodes-cadvisor'
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecure_skip_verify: true
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+        - role: node
+        relabel_configs:
+        - action: labelmap
+          regex: __meta_kubernetes_node_label_(.+)
+        - target_label: __address__
+          replacement: kubernetes.default.svc:443
+        - source_labels: [__meta_kubernetes_node_name]
+          regex: (.+)
+          target_label: __metrics_path__
+          replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          regex: '(container|machine)_(cpu|memory|network|fs)_(.+)'
+          action: keep
+        - source_labels: [__name__]
+          regex: 'container_memory_failures_total'
+          action: drop
+      replicaExternalLabelName: __replica__
+      retention: 2d
+      retentionSize: "15GB"
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: gp2
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+prometheus-pushgateway:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: kube-system
