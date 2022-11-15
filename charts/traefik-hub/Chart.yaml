@@ -3,10 +3,12 @@ name: traefik-hub
 description: A Weaveworks Helm chart for the traefik-hub proxy
 type: application
 version: 0.0.1
+
 dependencies:
   - name: traefik-hub
     version: "1.0.0"
-    repository: "https://traefik-hub.github.io/charts"
+    repository: "https://traefik.github.io/charts"
+
 kubeVersion: ">=1.16.0-0"
 sources:
   - https://github.com/traefik/hub-helm-chart
