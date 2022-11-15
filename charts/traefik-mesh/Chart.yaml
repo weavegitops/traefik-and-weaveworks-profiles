@@ -1,25 +1,27 @@
 apiVersion: v2
-name: traefik
-description: A Weaveworks Helm chart for the traefik proxy
+name: traefik-mesh
+description: A Weaveworks Helm chart for the traefik-mesh
 type: application
-version: 0.0.2
+version: 0.0.1
+
 dependencies:
-  - name: traefik
-    version: "20.2.0"
+  - name: traefik-mesh
+    version: "4.1.0"
     repository: "https://traefik.github.io/charts"
+
 kubeVersion: ">=1.16.0-0"
 sources:
-  - https://github.com/traefik/traefik-helm-chart
+  - https://github.com/traefik/mesh-helm-chart
 
 keywords:
-- ingress
+- service-mesh
 
 maintainers:
   - name: Weaveworks
     email: support@weave.works
 
 annotations:
-  "weave.works/profile": traefik
-  "weave.works/category": ingress
+  "weave.works/profile": traefik-mesh
+  "weave.works/category": service-mesh
   "weave.works/layer": layer-2
   "weave.works/operator": "true"

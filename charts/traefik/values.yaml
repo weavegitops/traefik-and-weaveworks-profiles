@@ -7,4 +7,13 @@ traefik:
     # * enable allowExternalNameServices on KubernetesIngress provider
     # * enable allowCrossNamespace on KubernetesCRD provider
     # * add an internal (ClusterIP) Service, dedicated for Traefik Hub
-    enabled: false
+    enabled: true
+    
+  deployment:
+    podAnnotations:
+      prometheus.io/port: "9100"
+      prometheus.io/scrape: "true"
+      prometheus.io/path: "/metrics"
+  metrics:
+    prometheus:
+      entryPoint: metrics
