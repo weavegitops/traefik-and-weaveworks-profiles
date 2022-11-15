@@ -12,40 +12,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # important parameter
-
-      - name: Configure Git
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
+          path: 'src'
+          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'dest'
+          ref: 'gh-pages'
+          fetch-depth: 0
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.7.0
+        uses: azure/setup-helm@v3
 
-      - name: Add dependencies
+      - name: Package Helm Charts
         shell: bash
         run: |
-          for dir in $(ls -d charts/*/ | cut -f2 -d'/'); do
-            repo_urls=$(helm dependency list charts/"$dir" | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" || true)
-            i=0
-            echo $repo_urls | while read urls; do
-              for u in $urls; do
-                if [ ! -z "$u" ] 
-                then
-                  echo $u
-                  helm repo add $dir$i $u
-                  ((i=i+1))
-                fi
-              done
-            done
+          helm plugin list
+          find src/charts/ -type f -name 'Chart.yaml' | sed -r 's|/[^/]+$||' | sort | uniq | xargs -L 1 helm dep up
+          for d in src/charts/*/ ; do
+              echo "$d"
+              helm package "$d" -u -d dest
           done
-
-      - name: Run chart-releaser
-        uses: stecky/yet-another-chart-releaser-action@v1
-        with:
-          charts_dir: charts
-          charts_repo_url: https://raw.githubusercontent.com/weaveworks/profiles-catalog/gh-pages/
-        env:
-          YACR_TOKEN: "${{ secrets.WEAVEWORKSBOT_PROFILES_CATALOG_RELEASE_TOKEN }}"
+      - name: Push New Files
+        shell: bash
+        working-directory: dest
+        run: |
+          helm repo index . --url https://raw.githubusercontent.com/weaveworks/traefik-and-weaveworks-profiles/gh-pages/
+          git config user.name "Helm Updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add $(git ls-files -o --exclude-standard)
+          git add index.yaml
+          git commit -m "Updated from ref: $GITHUB_SHA"
+          git push
