@@ -51,7 +51,7 @@ kube-prometheus-stack:
   alertmanager:
     enabled: true
     alertmanagerSpec:
-      replicas: 3
+      replicas: 1
     config:
       route:
         group_by: ['alertname', 'cluster']
