@@ -52,7 +52,6 @@ kube-prometheus-stack:
     enabled: true
     alertmanagerSpec:
       replicas: 3
-      secrets: ["alertmanager-slack-urls"]
     config:
       route:
         group_by: ['alertname', 'cluster']
