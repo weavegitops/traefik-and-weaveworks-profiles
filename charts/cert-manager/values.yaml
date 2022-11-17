@@ -1,0 +1,7 @@
+cert-manager:
+  installCRDs: true
+  serviceAccount:
+    name: cert-manager
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .params.AWS_ACCOUNT_ID }}:role/{{ .params.CLUSTER_NAME }}-cert-manager"
+         

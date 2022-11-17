@@ -1,0 +1,37 @@
+apiVersion: v2
+name: external-dns
+icon: https://raw.githubusercontent.com/external-dns/external-dns.github.io/master/assets/external-dns_logo-cb55bb5c346.png
+description: A Weaveworks Helm chart for external dns
+type: application
+version: 0.0.10
+kubeVersion: ">=1.16.0-0"
+home: https://github.com/weaveworks/profiles-catalog
+sources:
+  - https://kubernetes-sigs.github.io/external-dns/
+
+keywords:
+- operator
+- dns
+
+annotations:
+  "weave.works/profile": external-dns
+  "weave.works/category": dns
+  "weave.works/operator": "true"
+  "weave.works/layer": layer-1
+  "weave.works/links": |
+    - name: Chart Sources
+      url: https://kubernetes-sigs.github.io/external-dns/
+    - name: Upstream Project
+      url: https://kubernetes-sigs.github.io/external-dns/
+  "weave.works/profile-ci": |
+    - "gke"
+    - "kind"
+
+maintainers:
+  - name: Weaveworks
+    email: support@weave.works
+
+dependencies:
+- name: external-dns
+  version: "1.9.0"
+  repository: "https://kubernetes-sigs.github.io/external-dns/"

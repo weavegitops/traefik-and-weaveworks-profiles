@@ -1,0 +1,2 @@
+region: '{{ .params.AWS_REGION }}'
+zone: 'weave.works'
