@@ -31,7 +31,7 @@ kube-prometheus-stack:
         client_id: '{{ (.params).CLUSTER_NAME }}'
       server:
         # domain: "grafana-mgmt.internal.weave.works"
-        root_url: https://grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works
+        root_url: https://grafana.{{ (.params).CLUSTER_NAME }}.cx.weave.works
     enabled: true
     ingress:
      enabled: true
@@ -40,14 +40,14 @@ kube-prometheus-stack:
        cert-manager.io/cluster-issuer: "letsencrypt"
        ingress.kubernetes.io/force-ssl-redirect: "true"
      hosts:
-     - 'grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works'
+     - 'grafana.{{ (.params).CLUSTER_NAME }}.cx.weave.works'
      paths:
      - /
      pathType: ImplementationSpecific
      tls:
      - secretName: grafana-tls
        hosts:
-       - 'grafana.{{ (.params).CLUSTER_NAME }}.{{ (.params).NAMESPACE }}.weave.works'
+       - 'grafana.{{ (.params).CLUSTER_NAME }}.cx.weave.works'
   alertmanager:
     enabled: true
     alertmanagerSpec:
