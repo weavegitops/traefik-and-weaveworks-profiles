@@ -9,11 +9,11 @@ traefik:
     # * add an internal (ClusterIP) Service, dedicated for Traefik Hub
     enabled: true
     
-  deployment:
-    podAnnotations:
-      prometheus.io/port: "9100"
-      prometheus.io/scrape: "true"
-      prometheus.io/path: "/metrics"
+  # deployment:
+  #   podAnnotations:
+  #     prometheus.io/port: "9100"
+  #     prometheus.io/scrape: "true"
+  #     prometheus.io/path: "/metrics"
   metrics:
     prometheus:
       entryPoint: metrics
