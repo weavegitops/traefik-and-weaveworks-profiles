@@ -14,13 +14,13 @@ entries:
       weave.works/profile-ci: |
         - "eks"
     apiVersion: v2
-    created: "2022-11-17T13:57:57.148340039Z"
+    created: "2022-11-17T14:14:58.464807381Z"
     dependencies:
     - name: aws-ebs-csi-driver
       repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
       version: 2.10.1
     description: A Weaveworks Helm chart for the AWS EBS-CSI Driver Profile
-    digest: b717173d42f9c009ab18e537819340a138e010e58b97040fef06f427f7fe19af
+    digest: 0fed52bcbbff87e1643741dc52364252063c51134d7ab414bd715c2bed790454
     keywords:
     - storage
     - aws
@@ -48,13 +48,13 @@ entries:
           url: https://github.com/fluxcd/flagger/
       weave.works/profile: flagger
     apiVersion: v2
-    created: "2022-11-17T13:57:57.149919334Z"
+    created: "2022-11-17T14:14:58.46679829Z"
     dependencies:
     - name: flagger
       repository: https://flagger.app
       version: 1.24.1
     description: A Weaveworks Helm chart for the Flagger Profile
-    digest: 8a61c74cd457e4c31ebf26d7b197ffc885ee033e0984d5d0b2b64eaf680d58de
+    digest: d56fc6e535acd99743db7bc55a9716701ecd089fe3ae2dcb665380f4677ce1a3
     home: https://github.com/weaveworks/profiles-catalog
     icon: https://linkerd.io/images/logo-only-200h.png
     keywords:
@@ -83,7 +83,7 @@ entries:
           url: https://github.com/prometheus-operator/kube-prometheus
       weave.works/profile: prometheus
     apiVersion: v2
-    created: "2022-11-17T13:57:57.249306757Z"
+    created: "2022-11-17T14:14:58.621297197Z"
     dependencies:
     - condition: kube-prometheus-stack.enabled
       name: kube-prometheus-stack
@@ -94,7 +94,37 @@ entries:
       repository: https://prometheus-community.github.io/helm-charts
       version: 1.18.2
     description: A Weaveworks Helm chart for observability
-    digest: e53b3b835af89e56400de55136faad65cf694a741b3a8a74315ce2e56dd34c88
+    digest: 9553d5730659b190debbb7857fd2641125ecb419b44d361329467be0b765cd38
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: support@weave.works
+      name: Weaveworks
+    name: prometheus
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/weavegitops/traefik-and-weaveworks-profiles/gh-pages/prometheus-1.1.28.tgz
+    version: 1.1.28
+  - annotations:
+      weave.works/layer: layer-1
+      weave.works/links: |
+        - name: Chart Sources
+          url: https://github.com/prometheus-community/helm-charts
+        - name: Upstream Project
+          url: https://github.com/prometheus-operator/kube-prometheus
+      weave.works/profile: prometheus
+    apiVersion: v2
+    created: "2022-11-17T14:14:58.592181264Z"
+    dependencies:
+    - condition: kube-prometheus-stack.enabled
+      name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 36.0.3
+    - condition: prometheus-pushgateway.enabled
+      name: prometheus-pushgateway
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 1.18.2
+    description: A Weaveworks Helm chart for observability
+    digest: 5e1fdc9478029d56c94cea89d72e78c50dc73943938dcd35db638d6c33934783
     kubeVersion: '>=1.16.0-0'
     maintainers:
     - email: support@weave.works
@@ -113,7 +143,7 @@ entries:
           url: https://github.com/prometheus-operator/kube-prometheus
       weave.works/profile: prometheus
     apiVersion: v2
-    created: "2022-11-17T13:57:57.225147524Z"
+    created: "2022-11-17T14:14:58.564185235Z"
     dependencies:
     - condition: kube-prometheus-stack.enabled
       name: kube-prometheus-stack
@@ -143,7 +173,7 @@ entries:
           url: https://github.com/prometheus-operator/kube-prometheus
       weave.works/profile: prometheus
     apiVersion: v2
-    created: "2022-11-17T13:57:57.200492093Z"
+    created: "2022-11-17T14:14:58.533338394Z"
     dependencies:
     - condition: kube-prometheus-stack.enabled
       name: kube-prometheus-stack
@@ -173,7 +203,7 @@ entries:
           url: https://github.com/prometheus-operator/kube-prometheus
       weave.works/profile: prometheus
     apiVersion: v2
-    created: "2022-11-17T13:57:57.175089764Z"
+    created: "2022-11-17T14:14:58.496428125Z"
     dependencies:
     - condition: kube-prometheus-stack.enabled
       name: kube-prometheus-stack
@@ -201,13 +231,13 @@ entries:
       weave.works/operator: "true"
       weave.works/profile: traefik
     apiVersion: v2
-    created: "2022-11-17T13:57:57.261361623Z"
+    created: "2022-11-17T14:14:58.634052955Z"
     dependencies:
     - name: traefik
       repository: https://traefik.github.io/charts
       version: 20.2.0
     description: A Weaveworks Helm chart for the traefik proxy
-    digest: d4f32926a84ae17d2fcaf09a633e0aba9f9a316f490f6f9eb7d718aa5ac49044
+    digest: cd472046af6361e28a52270a5aea078e8940a02386c820c1fddbe37377d95258
     keywords:
     - ingress
     kubeVersion: '>=1.16.0-0'
@@ -227,7 +257,7 @@ entries:
       weave.works/operator: "true"
       weave.works/profile: traefik
     apiVersion: v2
-    created: "2022-11-17T13:57:57.256710536Z"
+    created: "2022-11-17T14:14:58.629545835Z"
     dependencies:
     - name: traefik
       repository: https://traefik.github.io/charts
@@ -253,7 +283,7 @@ entries:
       weave.works/operator: "true"
       weave.works/profile: traefik
     apiVersion: v2
-    created: "2022-11-17T13:57:57.252993047Z"
+    created: "2022-11-17T14:14:58.625301215Z"
     dependencies:
     - name: traefik
       repository: https://traefik.github.io/charts
@@ -280,13 +310,13 @@ entries:
       weave.works/operator: "true"
       weave.works/profile: traefik-hub
     apiVersion: v2
-    created: "2022-11-17T13:57:57.26263162Z"
+    created: "2022-11-17T14:14:58.63509766Z"
     dependencies:
     - name: hub-agent
       repository: https://traefik.github.io/charts
       version: 1.0.0
     description: A Weaveworks Helm chart for the traefik-hub proxy
-    digest: a23be9fd991113b27059c5a0e7eaa2262966e291707f8e086e66ba9d26bf4fab
+    digest: 4b5d1159b3bab9d954cff162c4561a6e4f5d198e4a2e642b43dbee6be3c6a64d
     keywords:
     - ingress
     kubeVersion: '>=1.16.0-0'
@@ -307,13 +337,13 @@ entries:
       weave.works/operator: "true"
       weave.works/profile: traefik-mesh
     apiVersion: v2
-    created: "2022-11-17T13:57:57.264820114Z"
+    created: "2022-11-17T14:14:58.63721277Z"
     dependencies:
     - name: traefik-mesh
       repository: https://traefik.github.io/charts
       version: 4.1.0
     description: A Weaveworks Helm chart for the traefik-mesh
-    digest: 37936963af6d130bf65df95b56de313a3f083dda666748478324303747ca8dbf
+    digest: eeb8e30d78ef4c2c22138d104c6d34a1a0f4ef0f2142afbe67a07a29d96ebf1a
     keywords:
     - service-mesh
     kubeVersion: '>=1.16.0-0'
@@ -327,4 +357,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/weavegitops/traefik-and-weaveworks-profiles/gh-pages/traefik-mesh-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-17T13:57:57.146055145Z"
+generated: "2022-11-17T14:14:58.462664471Z"
