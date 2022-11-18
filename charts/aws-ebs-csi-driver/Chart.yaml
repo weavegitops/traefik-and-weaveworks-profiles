@@ -2,7 +2,7 @@ apiVersion: v2
 name: aws-ebs-csi-driver
 description: A Weaveworks Helm chart for the AWS EBS-CSI Driver Profile
 type: application
-version: 0.0.7
+version: 0.0.8
 dependencies:
   - name: aws-ebs-csi-driver
     version: "2.10.1"

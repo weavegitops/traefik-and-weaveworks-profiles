@@ -2,6 +2,6 @@ aws-ebs-csi-driver:
   controller:
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .params.AWS_ACCOUNT_ID }}:role/{{ .params.CLUSTER_NAME }}-ebs-csi"
+        eks.amazonaws.com/role-arn: "arn:aws:iam::482649550366:role/{{ .params.CLUSTER_NAME }}-ebs-csi"
 
            

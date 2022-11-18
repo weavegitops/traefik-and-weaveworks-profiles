@@ -3,5 +3,5 @@ cert-manager:
   serviceAccount:
     name: cert-manager
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .params.AWS_ACCOUNT_ID }}:role/{{ .params.CLUSTER_NAME }}-cert-manager"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::482649550366:role/{{ .params.CLUSTER_NAME }}-cert-manager"
          

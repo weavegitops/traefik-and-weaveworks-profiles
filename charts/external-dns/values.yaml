@@ -5,4 +5,4 @@ external-dns:
   serviceAccount:
     name: external-dns
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::{{ or (.params).AWS_ACCOUNT_ID "55555555555" }}:role/{{ or (.params).CLUSTER_NAME "test-cluster" }}-external-dns
+      eks.amazonaws.com/role-arn: arn:aws:iam::482649550366:role/{{ or (.params).CLUSTER_NAME "test-cluster" }}-external-dns
