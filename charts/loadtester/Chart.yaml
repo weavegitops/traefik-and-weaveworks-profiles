@@ -1,0 +1,33 @@
+apiVersion: v2
+name: loadtester
+description: A Weaveworks Helm chart for the Flagger Loadtester
+type: application
+version: 0.0.1
+dependencies:
+- name: loadtester
+  version: "0.22.0"
+  repository: "https://flagger.app"
+kubeVersion: ">=1.16.0-0"
+home: https://github.com/weaveworks/profiles-catalog
+sources:
+  - https://flagger.app
+
+keywords:
+- canary
+- deployment
+- flagger
+- loadester
+
+maintainers:
+  - name: Weaveworks
+    email: support@weave.works
+
+annotations:
+  "weave.works/profile": load-tester
+  "weave.works/category": Deployment
+  "weave.works/layer": layer-2
+  "weave.works/links": |
+    - name: Chart Sources
+      url:  https://flagger.app
+    - name: Upstream Project
+      url: https://github.com/fluxcd/flagger/
