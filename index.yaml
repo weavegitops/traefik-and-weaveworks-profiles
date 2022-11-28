@@ -510,7 +510,7 @@ entries:
     version: 0.0.5
   - annotations:
       weave.works/category: ingress
-      weave.works/layer: layer-1
+      weave.works/layer: layer-2
       weave.works/operator: "true"
       weave.works/profile: traefik
     apiVersion: v2
@@ -667,7 +667,7 @@ entries:
     version: 0.0.6
   - annotations:
       weave.works/category: ingress
-      weave.works/layer: layer-2
+      weave.works/layer: layer-1
       weave.works/operator: "true"
       weave.works/profile: traefik-hub
     apiVersion: v2
@@ -693,7 +693,7 @@ entries:
     version: 0.0.5
   - annotations:
       weave.works/category: ingress
-      weave.works/layer: layer-2
+      weave.works/layer: layer-1
       weave.works/operator: "true"
       weave.works/profile: traefik-hub
     apiVersion: v2
