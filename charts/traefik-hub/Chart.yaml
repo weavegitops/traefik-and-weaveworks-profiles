@@ -2,11 +2,11 @@ apiVersion: v2
 name: traefik-hub
 description: A Weaveworks Helm chart for the traefik-hub proxy
 type: application
-version: 0.0.7
+version: 0.0.8
 
 dependencies:
   - name: hub-agent
-    version: "1.0.0"
+    version: "1.2.1"
     repository: "https://traefik.github.io/charts"
 
 kubeVersion: ">=1.16.0-0"
