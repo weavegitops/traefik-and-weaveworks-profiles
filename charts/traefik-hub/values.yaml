@@ -5,6 +5,10 @@ extraManifests:
     name: app-secrets
     namespace: flux-system
   spec:
+    decryption:
+      provider: sops
+      secretRef:
+        name: sops-gpg
     force: false
     interval: 5m0s
     path: ./apps/traefik-hub
