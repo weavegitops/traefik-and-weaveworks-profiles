@@ -2,7 +2,7 @@ apiVersion: v2
 name: traefik-hub
 description: A Weaveworks Helm chart for the traefik-hub proxy
 type: application
-version: 0.0.5
+version: 0.0.6
 
 dependencies:
   - name: hub-agent
@@ -23,5 +23,5 @@ maintainers:
 annotations:
   "weave.works/profile": traefik-hub
   "weave.works/category": ingress
-  "weave.works/layer": layer-2
+  "weave.works/layer": layer-1
   "weave.works/operator": "true"
